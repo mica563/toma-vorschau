@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<title>Toma Treuhand Website</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Hanken+Grotesk:wght@400;500;600&display=swap">
+<style>
+/* Layout: helle Seite mit dunklen Bändern; grosse breite Archivo-Titel, Outline als Markenzeichen */
+:root{
+  --ink:#142033; --ink2:#22314A; --accent:#B08A4A; --accent2:#D9BC87; --accentText:#8A6A33;
+  --paper:#F4F5F7; --paperA:rgba(244,245,247,.9); --soft:#E4E7EC; --text:#4A5563; --line:#D9DEE5; --white:#FFFFFF;
+  --display:'Archivo','Arial Narrow',Arial,sans-serif; --body:'Hanken Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+:root.logo-a{ --ink:#0E3A55; --ink2:#1A4B69; --accent:#7A1E2B; --accent2:#E7B9BF; --accentText:#7A1E2B; --soft:#E4E8ED }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;overflow-x:hidden;overflow-x:clip;max-width:100%}
+main,footer{overflow-x:clip}
+section[id]{scroll-margin-top:84px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--paper)}
+a{color:inherit}
+img{max-width:100%;display:block}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+h1,h2,h3{text-wrap:balance}
+.wide{font-family:var(--display);font-stretch:118%}
+.outline{color:transparent;-webkit-text-stroke:1.6px var(--sk,var(--ink))}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px),5vw);padding-right:max(20px,env(safe-area-inset-right,0px),5vw)}
+@media (min-width:1400px){.wrap{padding-left:64px;padding-right:64px}}
+.g2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(32px,6vw,96px);align-items:center}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 28px;border-radius:999px;background:var(--ink);color:var(--white);text-decoration:none;font-weight:600;border:0;font:600 16px var(--body);cursor:pointer;transition:transform .25s,background .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.btn.light{background:var(--white);color:var(--ink)}
+
+/* Kopfzeile */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paperA);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);transition:box-shadow .3s}
+header.scrolled{box-shadow:0 1px 0 var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:84px;gap:16px}
+.brand{display:flex;align-items:center;gap:14px;text-decoration:none}
+.brand svg{width:46px;height:46px;flex:none}
+.bname{display:flex;flex-direction:column;line-height:1.05}
+.bname b{font-family:var(--display);font-stretch:118%;font-size:26px;font-weight:650}
+.bname span{font-size:12.5px;letter-spacing:.04em;color:var(--text);margin-top:4px}
+.navr{display:flex;align-items:center;gap:22px}
+.navr .tel{text-decoration:none;font-weight:500;font-size:15px}
+.menubtn{display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 20px;border:0;border-radius:999px;background:var(--ink);color:var(--white);font:600 15px var(--body);cursor:pointer}
+.menubtn svg{transition:transform .4s}
+.menubtn:hover svg{transform:scaleX(.8)}
+
+/* Logo-Farben über Klassen */
+.lg{--la:var(--accent);--li:var(--ink);--lg:var(--paper)}
+.lg-w{--la:var(--white);--li:var(--white);--lg:var(--ink)}
+.lg .pa{fill:var(--accent)} .lg .pi{fill:var(--ink)} .lg .gap{stroke:var(--paper)}
+@media (max-width:900px){.facts{font-size:13px;padding:14px 16px}}
+.mB,.mA{display:contents}
+:root.logo-a .mB{display:none} :root:not(.logo-a) .mA{display:none}
+
+/* Vollbild-Menü */
+.ov{position:fixed;inset:0;z-index:100;background:var(--ink);color:var(--white);overflow-y:auto;clip-path:circle(0% at calc(100% - 70px) 42px);visibility:hidden;transition:clip-path .8s cubic-bezier(.7,0,.2,1),visibility 0s .8s;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.ov.open{clip-path:circle(150% at calc(100% - 70px) 42px);visibility:visible;transition:clip-path .8s cubic-bezier(.7,0,.2,1)}
+.ov .bname span{color:rgba(255,255,255,.75)}
+.closebtn{background:var(--white);color:var(--ink)}
+.ovgrid{padding-top:40px;padding-bottom:64px;align-items:end}
+.bignav{display:flex;flex-direction:column}
+.bignav a{font-family:var(--display);font-stretch:118%;font-size:clamp(42px,6vw,76px);font-weight:600;line-height:1.16;text-decoration:none;opacity:0;transform:translateY(40px);transition:opacity .5s,transform .7s cubic-bezier(.2,.8,.2,1),color .3s}
+.ov.open .bignav a{opacity:1;transform:none}
+.ov.open .bignav a:nth-child(1){transition-delay:.3s}.ov.open .bignav a:nth-child(2){transition-delay:.36s}.ov.open .bignav a:nth-child(3){transition-delay:.42s}.ov.open .bignav a:nth-child(4){transition-delay:.48s}.ov.open .bignav a:nth-child(5){transition-delay:.54s}
+.bignav a:hover{color:var(--accent2)}
+.ovinfo{display:flex;flex-direction:column;gap:6px;color:rgba(255,255,255,.8);opacity:0;transition:opacity .6s .6s}
+.ov.open .ovinfo{opacity:1}
+.ovinfo strong{color:var(--white);font-weight:600}
+.ovinfo .big{color:var(--white);font-size:22px;text-decoration:none}
+
+/* Laden */
+@keyframes dropIn{from{transform:translateY(-34px);opacity:0}to{transform:none;opacity:1}}
+@keyframes riseIn{from{transform:translateY(34px);opacity:0}to{transform:none;opacity:1}}
+@keyframes lineIn{from{transform:translateY(105%)}to{transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes kb{from{transform:scale(1.18)}to{transform:scale(1)}}
+.t1{animation:dropIn 1.1s cubic-bezier(.2,.8,.2,1) .5s both}
+.t2{animation:riseIn 1.1s cubic-bezier(.2,.8,.2,1) .7s both}
+.mask{display:block;overflow:hidden;padding-bottom:.06em}
+.mask>span{display:block;animation:lineIn 1s cubic-bezier(.2,.8,.2,1) both}
+.d1{animation-delay:.15s!important}.d2{animation-delay:.3s!important}.d3{animation-delay:.6s!important}.d4{animation-delay:.85s!important}
+.fade{animation:fadeUp .9s cubic-bezier(.2,.8,.2,1) both}
+.kb{animation:kb 2.6s cubic-bezier(.2,.8,.2,1) both}
+
+/* Hero */
+.hero{padding-block:clamp(36px,7vw,96px) clamp(56px,8vw,120px)}
+.hero h1{margin:0;font-size:clamp(44px,7.4vw,112px);line-height:.98;font-weight:700;letter-spacing:-.015em}
+.hero .lead{margin:30px 0 38px;max-width:34em;font-size:19px;color:var(--text)}
+.by{margin:0 0 22px;font-weight:600;font-size:16px;color:var(--text)}
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.heroimg{position:relative;aspect-ratio:1/1;max-width:100%;border-radius:32px;background:var(--soft);overflow:hidden}
+.heroimg>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%}
+.badge{position:absolute;top:22px;left:22px;width:clamp(96px,11vw,136px);aspect-ratio:1;border-radius:26px;background:var(--paper);display:grid;place-items:center;box-shadow:0 18px 40px -20px rgba(10,16,28,.5)}
+.badge svg{width:76%;height:auto;overflow:visible}
+.badge .gap{stroke:var(--paper)}
+.facts{position:absolute;left:20px;right:20px;bottom:20px;display:flex;justify-content:space-between;gap:12px;padding:16px 20px;border-radius:20px;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);font-size:14px;line-height:1.45;color:var(--ink)}
+.facts b{font-family:var(--display);font-stretch:118%;font-weight:600;font-size:17px;display:block}
+
+/* Laufband */
+.band{background:var(--ink);color:var(--white);overflow:hidden;padding-block:22px}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.mq{display:flex;width:max-content;gap:48px;animation:marquee 40s linear infinite;font-family:var(--display);font-stretch:118%;font-size:26px;font-weight:500;white-space:nowrap}
+.mq span{display:inline-flex;align-items:center;gap:48px}
+.mq i{width:9px;height:9px;border-radius:2px;background:var(--accent2);transform:rotate(45deg)}
+
+/* Scroll-Animationen (mit JS) */
+.js .rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .fl{opacity:0;transform:translateX(-40px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.js .fr{opacity:0;transform:translateX(40px);transition:opacity 1s cubic-bezier(.2,.8,.2,1),transform 1.1s cubic-bezier(.2,.8,.2,1)}
+.js .zm{clip-path:inset(14% 14% 14% 14% round 28px);transition:clip-path 1.3s cubic-bezier(.2,.8,.2,1)}
+.js .zm img{transform:scale(1.2);transition:transform 1.6s cubic-bezier(.2,.8,.2,1)}
+.js .in{opacity:1;transform:none}
+.js .zm.in{clip-path:inset(0 0 0 0 round 28px)}
+.js .zm.in img{transform:none}
+.js .tile.zm.in:hover img.ph{transform:scale(1.05)}
+.js .stag>*{transition-delay:calc(var(--i,0) * 90ms)}
+
+section.pad{padding-block:clamp(80px,10vw,150px)}
+h2{margin:0}
+.h2{font-size:clamp(34px,4.6vw,64px);line-height:1.03;font-weight:650}
+.h2xl{font-size:clamp(40px,6vw,88px);line-height:.98;font-weight:700}
+
+/* Philosophie */
+.photo{aspect-ratio:4/5;max-width:100%;border-radius:28px;overflow:hidden;background:var(--soft)}
+.photo img{width:100%;height:100%;object-fit:cover}
+.quote{margin:28px 0 48px;font-size:clamp(21px,2vw,27px);line-height:1.45}
+.vals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.vals .bar2{width:36px;height:3px;background:var(--accent);margin-bottom:18px}
+.vals h3{margin:0 0 8px;font-size:20px;font-weight:600}
+.vals p{margin:0;color:var(--text)}
+
+/* Kacheln */
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-bottom:clamp(80px,10vw,150px)}
+.tile{position:relative;display:block;aspect-ratio:4/5;max-width:100%;border-radius:28px;overflow:hidden;text-decoration:none;color:var(--white);background:var(--ink)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile .ph{transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.tile:hover .ph{transform:scale(1.05)}
+.scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,16,28,.8) 0%,rgba(10,16,28,.25) 45%,rgba(10,16,28,0) 70%)}
+.tcap{position:absolute;left:0;right:0;bottom:0;padding:clamp(22px,3vw,44px);display:flex;justify-content:space-between;align-items:end;gap:16px}
+.tcap small{display:block;font-size:15px;opacity:.85;margin-bottom:8px}
+.tcap strong{display:block;font-family:var(--display);font-stretch:118%;font-size:clamp(26px,3vw,44px);line-height:1.05;font-weight:600}
+.arrow{flex:none;transition:transform .35s}
+.tile:hover .arrow,.svc:hover .arrow{transform:translate(4px,-4px)}
+
+/* Leistungen */
+.lst{background:var(--white)}
+.lhead{display:flex;justify-content:space-between;align-items:end;gap:28px;flex-wrap:wrap;margin-bottom:48px}
+.tabs{display:inline-flex;padding:5px;border-radius:999px;background:var(--paper);position:relative}
+.tabs button{position:relative;z-index:1;min-height:46px;padding:0 24px;border:0;border-radius:999px;background:transparent;color:var(--ink);font:600 15px var(--body);cursor:pointer;transition:color .35s}
+.tabs button[aria-selected="true"]{color:var(--white)}
+.pill{position:absolute;top:5px;bottom:5px;left:5px;border-radius:999px;background:var(--ink);transition:transform .45s cubic-bezier(.2,.8,.2,1),width .45s cubic-bezier(.2,.8,.2,1)}
+.svcs{border-top:1px solid var(--line)}
+.svc{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr) auto;gap:32px;align-items:baseline;padding:30px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.svc h3{margin:0;font-family:var(--display);font-stretch:118%;font-size:clamp(22px,2.2vw,30px);font-weight:600;line-height:1.15}
+.svc p{margin:0;color:var(--text)}
+.panel[hidden]{display:none}
+.panel.show .svc{animation:fadeUp .6s cubic-bezier(.2,.8,.2,1) both}
+
+/* Über mich */
+.lead2{margin:0 0 40px;font-size:19px;color:var(--text);max-width:32em}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;padding:20px 0;border-top:1px solid var(--line)}
+.tl li:last-child{border-bottom:1px solid var(--line)}
+.tl b{font-family:var(--display);font-stretch:118%;font-size:28px;font-weight:600;color:var(--accentText);line-height:1.2}
+.tl span{padding-top:4px}
+.portrait{aspect-ratio:4/5;max-width:100%;border-radius:28px;overflow:hidden;background:var(--soft)}
+.portrait img{width:100%;height:116%;object-fit:cover;object-position:50% 25%;will-change:transform}
+
+/* Kontakt */
+.contact{--sk:var(--white);background:var(--ink);color:var(--white)}
+.contact .lead{margin:24px 0 44px;font-size:19px;color:rgba(255,255,255,.78);max-width:26em}
+.direct{display:block;text-decoration:none;font-family:var(--display);font-stretch:118%;line-height:1.35}
+.direct.p{font-size:clamp(28px,3vw,42px);font-weight:600}
+.direct.m{font-size:clamp(20px,2.4vw,34px);font-weight:500;color:var(--accent2);overflow-wrap:anywhere}
+.addr{margin:36px 0 0;color:rgba(255,255,255,.78)}
+form{display:grid;gap:16px;padding:clamp(22px,3vw,40px);border-radius:28px;background:var(--white);color:var(--ink)}
+.frow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+label{display:grid;gap:6px;font-size:14px;font-weight:600}
+input,textarea{font:inherit;font-weight:400;font-size:16px;width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink)}
+input{min-height:52px}
+textarea{resize:vertical;min-height:140px}
+input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+.note{margin:0;font-size:13px;color:var(--text)}
+.ok{margin:0;padding:12px 16px;border-radius:12px;background:var(--soft);font-size:14px}
+
+footer{background:var(--ink);color:rgba(255,255,255,.75);font-size:15px}
+.fgrid{padding-block:56px 40px;border-top:1px solid rgba(255,255,255,.14);align-items:start}
+.fgrid>div,.fgrid>nav{display:grid;gap:4px}
+.fgrid strong{color:var(--white);font-weight:600}
+footer a{text-decoration:none}
+footer a:hover{color:var(--white)}
+.copy{padding-block:0 32px;font-size:13px;color:rgba(255,255,255,.6)}
+
+@media (max-width:900px){
+  .g2,.g3,.tiles{grid-template-columns:minmax(0,1fr)}
+  .svc{grid-template-columns:minmax(0,1fr) auto;gap:6px 16px}
+  .svc p{grid-column:1}
+  .svc .arrow{grid-row:1/span 2;grid-column:2;align-self:center}
+  .frow,.vals{grid-template-columns:minmax(0,1fr)}
+  .navr .tel{display:none}
+  .bar{height:72px}
+  .brand svg{width:40px;height:40px}
+  .bname b{font-size:22px}
+  .tl li{grid-template-columns:84px minmax(0,1fr)}
+  .tiles .tile{aspect-ratio:4/4.4}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .js .rv,.js .fl,.js .fr{opacity:1;transform:none}
+  .js .zm{clip-path:none} .js .zm img{transform:none}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mB" viewBox="0 0 100 100">
+    <path style="fill:var(--la)" d="M57 12H70V75H90V88H34V75H57Z"/>
+    <path style="fill:var(--li);stroke:var(--lg)" d="M10 12H66V25H43V88H30V25H10Z" stroke-width="5" paint-order="stroke fill"/>
+    <rect style="fill:var(--la);stroke:var(--lg)" x="34" y="75" width="14" height="13" stroke-width="5" paint-order="stroke fill"/>
+    <rect style="fill:var(--la)" x="44" y="75" width="10" height="13"/>
+  </symbol>
+  <symbol id="mA" viewBox="0 0 100 100">
+    <path style="fill:var(--la)" d="M10 14H52L44 30H10Z"/>
+    <path style="fill:var(--li)" d="M56 14H90V30H59V88H46V30H48Z"/>
+  </symbol>
+</svg>
+
+<header id="hdr">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Toma Treuhand und Versicherungen, zur Startseite">
+      <span class="mB"><svg class="lg" aria-hidden="true"><use href="#mB"/></svg></span>
+      <span class="mA"><svg class="lg" aria-hidden="true"><use href="#mA"/></svg></span>
+      <span class="bname"><b>Toma</b><span>Treuhand &amp; Versicherungen</span></span>
+    </a>
+    <div class="navr">
+      <a class="tel" href="tel:+41765699007">076 569 90 07</a>
+      <button class="menubtn" id="openMenu" type="button" aria-expanded="false" aria-controls="menu">Menü
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M0 1h20M6 7h14M0 13h20"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="ov" id="menu" role="dialog" aria-modal="true" aria-label="Hauptmenü">
+  <div class="wrap bar">
+    <a class="brand" href="#top" data-close aria-label="Zur Startseite">
+      <span class="mB"><svg class="lg-w" aria-hidden="true"><use href="#mB"/></svg></span>
+      <span class="mA"><svg class="lg-w" aria-hidden="true"><use href="#mA"/></svg></span>
+      <span class="bname"><b>Toma</b><span>Treuhand &amp; Versicherungen</span></span>
+    </a>
+    <button class="menubtn closebtn" id="closeMenu" type="button">Schliessen
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13"/></svg>
+    </button>
+  </div>
+  <div class="wrap g2 ovgrid">
+    <nav class="bignav" aria-label="Hauptnavigation">
+      <a href="#top" data-close>Home</a>
+      <a href="#philosophie" data-close>Philosophie</a>
+      <a href="#leistungen" data-close>Leistungen</a>
+      <a href="#ueber-mich" data-close>Über mich</a>
+      <a href="#kontakt" data-close>Kontakt</a>
+    </nav>
+    <div class="ovinfo">
+      <strong>Toma Treuhand &amp; Versicherungen</strong>
+      <span>Vogelsangstrasse 34, 8180 Bülach</span>
+      <a class="big" href="tel:+41765699007" style="margin-top:14px">076 569 90 07</a>
+      <a class="big" href="mailto:info@toma-treuhand.ch">info@toma-treuhand.ch</a>
+      <span style="display:flex;gap:18px;margin-top:18px">
+        <a href="https://www.instagram.com/toma_treuhand/">Instagram</a>
+        <a href="https://www.facebook.com/Toma-Treuhand-Versicherungen-108284908007718">Facebook</a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<main id="top">
+  <section class="wrap g2 hero">
+    <div>
+      <p class="by fade d1">by Luigi Toma, Bülach</p>
+      <h1 class="wide">
+        <span class="mask"><span class="d1">Treuhand &amp;</span></span>
+        <span class="mask"><span class="d2 outline" style="font-weight:600">Versiche&shy;rungen</span></span>
+      </h1>
+      <p class="lead fade d3">Persönliche Beratung für Private und Unternehmen. Ehrlich, verständlich und auf Wunsch auf Italienisch.</p>
+      <div class="actions fade d4">
+        <a class="btn" href="#kontakt">Beratung vereinbaren</a>
+        <a class="btn ghost" href="#leistungen">Leistungen ansehen</a>
+      </div>
+    </div>
+    <div class="heroimg">
+      <img class="kb" src="img/aktentasche.jpg" alt="Geschäftsmann mit Ledertasche" width="1800" height="1200">
+      <div class="badge fade d1" aria-hidden="true">
+        <span class="mB"><svg class="lg" viewBox="0 0 100 100"><path class="pa t2" d="M57 12H70V75H90V88H34V75H57Z"/><path class="pi gap t1" d="M10 12H66V25H43V88H30V25H10Z" stroke-width="3" paint-order="stroke fill"/><rect class="pa gap t2" x="34" y="75" width="14" height="13" stroke-width="3" paint-order="stroke fill"/><rect class="pa t2" x="44" y="75" width="10" height="13"/></svg></span>
+        <span class="mA"><svg class="lg" viewBox="0 0 100 100"><path class="pa t1" d="M10 14H52L44 30H10Z"/><path class="pi t2" d="M56 14H90V30H59V88H46V30H48Z"/></svg></span>
+      </div>
+      <div class="facts fade d4">
+        <span><b>Seit 2009</b>in der Branche, VBV-diplomiert</span>
+        <span style="text-align:right"><b>DE / IT</b>Beratung &amp; Übersetzung</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true">
+    <div class="mq" id="mq"></div>
+  </div>
+
+  <section id="philosophie" class="wrap g2 pad">
+    <div class="photo fl"><img src="img/fuellfeder.jpg" alt="Hand unterschreibt ein Dokument" style="object-position:38% 50%"></div>
+    <div>
+      <h2 class="wide h2 rv">Meine Philosophie</h2>
+      <p class="quote rv">Ich bin überzeugt: Der Kunde ist König. Deshalb setze ich alles daran, Ihnen eine familiäre und zugleich professionelle Beratung zu bieten.</p>
+      <div class="vals stag">
+        <div class="rv" style="--i:0"><div class="bar2"></div><h3>Der Kunde ist König</h3><p>Ich berate Sie so, wie ich selbst gerne beraten werden möchte.</p></div>
+        <div class="rv" style="--i:1"><div class="bar2"></div><h3>Ehrliche Beziehung</h3><p>Authentisch und ehrlich zu sein ist der beste Weg zu einer langjährigen Zusammenarbeit.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="tiles">
+      <a class="tile zm" href="#leistungen" data-tab="firma">
+        <img class="ph" src="img/aktentasche.jpg" alt="" style="object-position:66% 50%">
+        <div class="scrim"></div>
+        <div class="tcap"><span><small>Geschäftskunden</small><strong>Alles für Ihr Unternehmen</strong></span>
+          <svg class="arrow" width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="22" cy="22" r="21"/><path d="M16 28L28 16M18 16h10v10"/></svg></div>
+      </a>
+      <a class="tile zm" href="#leistungen" data-tab="privat">
+        <img class="ph" src="img/privatkundin.jpg" alt="" style="object-position:50% 28%">
+        <div class="scrim"></div>
+        <div class="tcap"><span><small>Privatkunden</small><strong>Alles für Sie und Ihre Familie</strong></span>
+          <svg class="arrow" width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="22" cy="22" r="21"/><path d="M16 28L28 16M18 16h10v10"/></svg></div>
+      </a>
+    </div>
+  </div>
+
+  <section id="leistungen" class="lst pad">
+    <div class="wrap">
+      <div class="lhead">
+        <h2 class="wide h2xl rv">Leistungen<br><span class="outline" style="font-weight:600">an einem Ort</span></h2>
+        <div class="tabs" role="tablist" aria-label="Kundengruppe wählen">
+          <span class="pill" id="pill" aria-hidden="true"></span>
+          <button type="button" role="tab" id="t-privat" aria-controls="p-privat" aria-selected="true">Privatkunden</button>
+          <button type="button" role="tab" id="t-firma" aria-controls="p-firma" aria-selected="false" tabindex="-1">Geschäftskunden</button>
+        </div>
+      </div>
+      <div class="panel" id="p-privat" role="tabpanel" aria-labelledby="t-privat"><div class="svcs"></div></div>
+      <div class="panel" id="p-firma" role="tabpanel" aria-labelledby="t-firma" hidden><div class="svcs"></div></div>
+    </div>
+  </section>
+
+  <section id="ueber-mich" class="wrap g2 pad">
+    <div>
+      <p class="by rv" style="margin-bottom:14px">Luigi Toma</p>
+      <h2 class="wide h2 rv" style="margin-bottom:28px">Erfahrung, auf die Sie zählen können</h2>
+      <p class="lead2 rv">Seit 2009 arbeite ich in der Versicherungsbranche. Mit dem Sprachdiplom Niveau C in Italienisch berate und übersetze ich auch zweisprachig.</p>
+      <ol class="tl stag">
+        <li class="rv" style="--i:0"><b>2009</b><span>Einstieg in die Versicherungsbranche</span></li>
+        <li class="rv" style="--i:1"><b>2020</b><span>Abschluss des VBV-Diploms</span></li>
+        <li class="rv" style="--i:2"><b>Heute</b><span>Eigene Firma in Bülach, Beratung auf Deutsch und Italienisch, Übersetzungen DE/IT</span></li>
+      </ol>
+    </div>
+    <div class="portrait fr"><img id="par" src="img/luigi.jpg" alt="Portrait von Luigi Toma"></div>
+  </section>
+
+  <section id="kontakt" class="contact pad">
+    <div class="wrap g2" style="align-items:start">
+      <div>
+        <h2 class="wide h2xl rv">Kontakt<br><span class="outline" style="font-weight:600">aufnehmen</span></h2>
+        <p class="lead rv">Das erste Gespräch ist unverbindlich. Rufen Sie an, schreiben Sie mir oder nutzen Sie das Formular.</p>
+        <a class="direct p rv" href="tel:+41765699007">076 569 90 07</a>
+        <a class="direct m rv" href="mailto:info@toma-treuhand.ch">info@toma-treuhand.ch</a>
+        <p class="addr rv">Vogelsangstrasse 34<br>8180 Bülach</p>
+      </div>
+      <form id="form" class="rv" novalidate>
+        <div class="frow">
+          <label for="f-vn">Vorname<input id="f-vn" name="vorname" autocomplete="given-name" required></label>
+          <label for="f-nn">Nachname<input id="f-nn" name="nachname" autocomplete="family-name" required></label>
+        </div>
+        <div class="frow">
+          <label for="f-em">E-Mail<input id="f-em" name="email" type="email" autocomplete="email" required></label>
+          <label for="f-tel">Telefon<input id="f-tel" name="tel" type="tel" autocomplete="tel"></label>
+        </div>
+        <label for="f-msg">Nachricht<textarea id="f-msg" name="msg" placeholder="Worum geht es?"></textarea></label>
+        <button class="btn" type="submit">Anfrage senden</button>
+        <p class="note">Ihre Angaben verwende ich nur, um Ihre Anfrage zu beantworten.</p>
+        <p class="ok" id="ok" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap g3 fgrid">
+    <div><strong>Toma Treuhand &amp; Versicherungen</strong><span>Vogelsangstrasse 34</span><span>8180 Bülach</span><span style="margin-top:10px">T: 076 569 90 07</span><span>E: info@toma-treuhand.ch</span></div>
+    <nav aria-label="Rechtliches"><strong>Links</strong><a href="https://toma-treuhand.ch/agbs/">AGB</a><a href="https://toma-treuhand.ch/agbs/">Datenschutz</a><a href="https://toma-treuhand.ch/impressum/">Impressum</a></nav>
+    <div><strong>Folgen Sie mir</strong><a href="https://www.instagram.com/toma_treuhand/">Instagram</a><a href="https://www.facebook.com/Toma-Treuhand-Versicherungen-108284908007718">Facebook</a></div>
+  </div>
+  <div class="wrap copy">© 2026 Toma Treuhand &amp; Versicherungen</div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  if(location.hash==='#logo-a') root.classList.add('logo-a');
+
+  // Laufband
+  var words=['Vorsorge','Steuern','Krankenkasse','Pensionskasse','Rechtsschutz','Haftpflicht','Motorfahrzeug','Übersetzungen DE / IT'];
+  var mq=document.getElementById('mq'), html='';
+  for(var k=0;k<2;k++) words.forEach(function(w){ html+='<span>'+w+'<i></i></span>'; });
+  mq.innerHTML=html;
+
+  // Leistungen
+  var data={
+    privat:[['Vorsorgeberatung','Eine klare Analyse Ihrer Vorsorgesituation und Lösungen, die zu Ihnen passen.'],['Steuererklärung & Optimierung','Ich erledige Ihre Steuererklärung und zeige, wo Sie legal sparen können.'],['Krankenversicherung','Die passende Lösung für Sie und Ihre ganze Familie.'],['Haushalt & Haftpflicht','Damit Sie bei einem Schaden nicht auf Ihr Erspartes zurückgreifen müssen.'],['Motorfahrzeug','Die beste Versicherung für Ihr Auto, mit fairem Preis-Leistungs-Verhältnis.'],['Rechtsschutz','Verkehrs- und Privatrechtsschutz: damit Sie Recht nicht nur haben, sondern auch bekommen.'],['Übersetzungen DE / IT','Dokumente aller Art, sorgfältig übersetzt dank Sprachdiplom Niveau C.']],
+    firma:[['Krankentaggeld','Absicherung Ihrer Mitarbeitenden bei Krankheit im Berufsleben.'],['Unfalltaggeld','Optimaler Schutz bei Berufs- und Nichtberufsunfall.'],['Pensionskasse','Vorsorge für Alter, Invalidität und Todesfall, persönlich beraten.'],['Betriebsrechtsschutz','Schützt Ihre Firma bei Streitigkeiten mit Kunden, Lieferanten oder Behörden.'],['Betriebshaftpflicht & Sachversicherung','Massgeschneiderter Schutz für Ihr Vermögen und Ihr Inventar.']]
+  };
+  var esc=function(s){return s.replace(/&/g,'&amp;');};
+  var arrow='<svg class="arrow" width="36" height="36" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="22" cy="22" r="21"/><path d="M16 28L28 16M18 16h10v10"/></svg>';
+  ['privat','firma'].forEach(function(key){
+    document.querySelector('#p-'+key+' .svcs').innerHTML=data[key].map(function(s,i){
+      return '<a class="svc rv" href="#kontakt" style="--i:'+i+';transition-delay:'+(i*60)+'ms;animation-delay:'+(i*60)+'ms"><h3>'+esc(s[0])+'</h3><p>'+esc(s[1])+'</p>'+arrow+'</a>';
+    }).join('');
+  });
+
+  var tabs=[document.getElementById('t-privat'),document.getElementById('t-firma')], pill=document.getElementById('pill');
+  function placePill(){ var t=tabs.filter(function(x){return x.getAttribute('aria-selected')==='true';})[0]; pill.style.width=t.offsetWidth+'px'; pill.style.transform='translateX('+(t.offsetLeft-5)+'px)'; }
+  function select(key){
+    tabs.forEach(function(t){
+      var on=t.id==='t-'+key; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1;
+      var p=document.getElementById(t.getAttribute('aria-controls')); p.hidden=!on;
+      if(on){ p.classList.remove('show'); void p.offsetWidth; p.classList.add('show'); p.querySelectorAll('.rv').forEach(function(e){e.classList.add('in');}); }
+    });
+    placePill();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){ select(t.id.slice(2)); });
+    t.addEventListener('keydown',function(e){ if(e.key==='ArrowRight'||e.key==='ArrowLeft'){ var n=tabs[(i+1)%2]; select(n.id.slice(2)); n.focus(); } });
+  });
+  document.querySelectorAll('[data-tab]').forEach(function(a){ a.addEventListener('click',function(){ select(a.dataset.tab); }); });
+  window.addEventListener('resize',placePill);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(placePill);
+  placePill();
+
+  // Menü
+  var ov=document.getElementById('menu'), ob=document.getElementById('openMenu');
+  function openM(){ ov.classList.add('open'); ob.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; setTimeout(function(){document.getElementById('closeMenu').focus();},350); }
+  function closeM(){ ov.classList.remove('open'); ob.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  ob.addEventListener('click',openM);
+  document.getElementById('closeMenu').addEventListener('click',function(){ closeM(); ob.focus(); });
+  ov.querySelectorAll('[data-close]').forEach(function(a){ a.addEventListener('click',closeM); });
+  ov.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeM(); ob.focus(); } });
+
+  // Logo und Home: ganz nach oben
+  document.querySelectorAll('a[href="#top"]').forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); closeM(); window.scrollTo({top:0,behavior:reduce0()?'auto':'smooth'}); }); });
+  function reduce0(){ return window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  // Kopfzeile
+  var hdr=document.getElementById('hdr');
+  // Scroll-Animationen
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !reduce){
+    var els=[].slice.call(document.querySelectorAll('.rv,.fl,.fr,.zm'));
+    var vh=window.innerHeight;
+    // Was beim Laden schon sichtbar ist, bleibt sichtbar
+    var later=els.filter(function(e){ var r=e.getBoundingClientRect(); return r.top>vh*0.92; });
+    later.forEach(function(e){ e.classList.add('pending'); });
+    root.classList.add('js');
+    els.forEach(function(e){ if(!e.classList.contains('pending')) e.classList.add('in'); });
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    },{rootMargin:'0px 0px -8% 0px',threshold:0.12});
+    later.forEach(function(e){ io.observe(e); });
+  }
+  // Parallax Portrait + Kopfzeile
+  var par=document.getElementById('par'), ticking=false;
+  function onScroll(){
+    hdr.classList.toggle('scrolled',window.scrollY>8);
+    if(!reduce&&par){ var r=par.parentNode.getBoundingClientRect(); var p=(r.top+r.height/2-window.innerHeight/2)/window.innerHeight; par.style.transform='translateY('+(-8-p*8)+'%)'; }
+    ticking=false;
+  }
+  window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(onScroll); } },{passive:true});
+  onScroll();
+
+  // Formular (Vorschau: sendet nichts)
+  document.getElementById('form').addEventListener('submit',function(e){
+    e.preventDefault(); var f=e.target, ok=document.getElementById('ok');
+    var miss=[f.vorname,f.nachname,f.email].filter(function(x){return !x.value.trim();});
+    if(miss.length){ miss[0].focus(); ok.hidden=false; ok.textContent='Bitte füllen Sie Vorname, Nachname und E-Mail aus.'; return; }
+    if(!f.email.checkValidity()){ f.email.focus(); ok.hidden=false; ok.textContent='Bitte prüfen Sie die E-Mail-Adresse.'; return; }
+    ok.hidden=false; ok.textContent='Dies ist eine Vorschau: Die Anfrage wurde nicht versendet. Auf der fertigen Webseite geht sie direkt an info@toma-treuhand.ch.';
+  });
+})();
+</script>
+
+</body>
+</html>
